@@ -19,4 +19,4 @@ jobs:
 
       # 2. Testar execução do CI
       - name: Teste de funcionamento
-        run: echo "CI funcionando no projeto INPE!"
+        run: echo "Pipeline do projeto INPE executado com sucesso!"
