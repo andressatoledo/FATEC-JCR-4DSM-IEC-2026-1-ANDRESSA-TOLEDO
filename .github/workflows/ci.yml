@@ -1,7 +1,5 @@
-# Nome do workflow (aparecerá na aba Actions)
-name: CI Simples
+name: CI com ESLint e Testes
 
-# Eventos que disparam o workflow
 on:
   push:
     branches: [dev]
@@ -9,14 +7,23 @@ on:
     branches: [dev]
 
 jobs:
-  build:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Baixar o código do repositório
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      # 2. Testar execução do CI
-      - name: Teste de funcionamento
-        run: echo "Pipeline do projeto INPE executado com sucesso!"
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar ESLint
+        run: npx eslint .
+
+      - name: Rodar Jest
+        run: npm test
